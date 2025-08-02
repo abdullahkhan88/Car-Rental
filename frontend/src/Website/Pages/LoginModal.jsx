@@ -30,7 +30,7 @@ const LoginModal = ({show,onClose}) => {
                 Send OTP
               </button>
             </div>
-              
+              {/* second */}
             {/* Right Panel */}
             <div
               className={`w-1/2 p-6 transition-transform duration-500 ${
