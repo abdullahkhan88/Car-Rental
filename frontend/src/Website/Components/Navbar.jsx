@@ -1,18 +1,21 @@
 
-import { useState } from "react";
+import { useState,useContext} from "react";
 import { FaCarRear, FaWhatsapp, FaBarsStaggered, } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LoginModal from "../Pages/LoginModal";
+import { ModalContext } from "../Context/ModalContext";
 
 function Navbar() {
+
+   const { openLoginModal, showLoginModal, closeLoginModal } = useContext(ModalContext);
 
   /* mobile Screen ke liye Toggle  */
   const [isopen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isopen);
 
   /* login Model ke liye Login */
-  const [showModal, setShowModal] = useState(false);
+  
 
   return (
     /* desktop Menu  */
@@ -27,7 +30,7 @@ function Navbar() {
           <li className='hover:text-blue-600 cursor-pointer'><Link to='/Profile'>Profile</Link></li>
           <li className='hover:text-blue-600 cursor-pointer'><Link to='/About-us'>About Us</Link></li>
           <li className='hover:text-blue-600 cursor-pointer'><Link to='/Contact'>Contact Us</Link></li>
-          <li onClick={() => setShowModal(true)} className='hover:text-blue-600 cursor-pointer'><Link to='/Login'>Login</Link></li>
+          <li onClick={openLoginModal} className='hover:text-blue-600 cursor-pointer'>Login</li>
         </ul>
         <div className='hidden gap-2 mr-8 md:flex items-center'>
           <FaWhatsapp className="text-3xl text-green-500" />
@@ -64,7 +67,7 @@ function Navbar() {
         }
 
       </nav>
-      <LoginModal show={showModal} onClose={()=>setShowModal(false)}/>
+      <LoginModal show={showLoginModal} onClose={closeLoginModal} />
     </>
 
   )

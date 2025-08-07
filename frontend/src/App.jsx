@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useContext } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -13,13 +13,17 @@ import CarDetails from './Website/Pages/CarDetails';
 import About from './Website/Pages/About';
 import Contact from './Website/Pages/Contact';
 import PageNotFound from './Website/Pages/PageNotFound';
-import Login from './Website/Pages/LoginModal';
+import LoginModal from './Website/Pages/LoginModal';
+
+import { ModalContext } from './Website/Context/ModalContext';
 
 function App() {
 
+  const {showLoginModal, closeLoginModal} = useContext(ModalContext)
 
   return (
     <>
+     {showLoginModal && <LoginModal onClose={closeLoginModal} />}
       <Router>
         <Navbar/>
         <Routes>
@@ -28,7 +32,7 @@ function App() {
           <Route path='/Car-Details' element={<CarDetails/>}/>
           <Route path='/About-us' element={<About/>}/>
           <Route path='/Contact' element={<Contact/>}/>
-          <Route path='/Login' element={<Login/>}/>
+            
            <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer/>
