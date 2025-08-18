@@ -1,21 +1,22 @@
 
-import { useState,useContext} from "react";
+import { useState, useContext } from "react";
 import { FaCarRear, FaWhatsapp, FaBarsStaggered, } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import LoginModal from "../Pages/LoginModal";
 import { ModalContext } from "../Context/ModalContext";
 
+
 function Navbar() {
 
-   const { openLoginModal, showLoginModal, closeLoginModal } = useContext(ModalContext);
+  const { openLoginModal, showLoginModal, closeLoginModal } = useContext(ModalContext);
 
   /* mobile Screen ke liye Toggle  */
   const [isopen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isopen);
 
   /* login Model ke liye Login */
-  
+
 
   return (
     /* desktop Menu  */
@@ -56,11 +57,13 @@ function Navbar() {
           <div className={`absolute top-16 left-0 w-full bg-green-50
            shadow-md z-10 p-6 md:hidden transition-all duration-300 ease-in-out ${isopen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'}`}>
             <ul className="flex flex-col gap-3">
-              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer">Home</li>
-              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer">Vehicles</li>
-              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer">Details</li>
-              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer">About Us</li>
-              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer">Contact Us</li>
+              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer"><Link to='/'>Home</Link></li>
+              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer"><Link to='/Vehicles'>Vehicles</Link></li>
+              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer"><Link to='/Car-Details'>Details</Link></li>
+              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer"><Link to='/Profile'>Profile</Link></li>
+              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer"><Link to='/About-us'>About Us</Link></li>
+              <li className="text-green-600 font-semibold hover:text-blue-900 cursor-pointer"><Link to='/Contact'>Contact Us</Link></li>
+              <li onClick={openLoginModal} className='hover:text-blue-600 cursor-pointer'>Login</li>
             </ul>
           </div>
 
