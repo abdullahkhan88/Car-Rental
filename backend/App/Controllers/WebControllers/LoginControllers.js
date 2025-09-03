@@ -22,7 +22,7 @@ const sendOtp = async (req, res) => {
         }
 
         await sendEmail(email, "Your OTP Code", `Your OTP is: ${otp}`);
-        res.json({ message: "OTP sent successfully!" });
+        res.json({ message: "We Have Sent OTP In Your Registered Email" });
     } catch (error) {
         res.status(500).json({ message: "Failed to send OTP", error: error.message });
     }
@@ -60,7 +60,7 @@ const VerifyOtp = async (req, res) => {
 
 const Registration = async (req, res) => {
     try {
-        const { email,FullName,mobile } = req.body;
+        const { FullName,email,mobile } = req.body;
         let user = await otpModel.findOne({ email });
         
         if (!user) {
@@ -69,12 +69,13 @@ const Registration = async (req, res) => {
         if (!user.isVerified) {
             return res.status(404).send({ message: "OTP is Not Verified " })
         }
+        
         /* yaha pe usermodel mein agar data hai to de do nhi hai 
         to new data update kar do upsert:true update*/
         let registeredUser = await UserModel.findOneAndUpdate(
-            { email }, {  email, FullName ,mobile }, { new: true, upsert: true }
+            { email }, {  email, FullName ,mobile, isVerified:true }, { new: true, upsert: true }
         )
-       
+
         return res.status(200).send({
             message: "Registration successful",
             user: registeredUser

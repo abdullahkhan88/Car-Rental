@@ -5,7 +5,7 @@ const {sendOtp,VerifyOtp,Registration} = require( '../../Controllers/WebControll
 const Mailroutes = express.Router();
 
 Mailroutes.post("/send", sendOtp); // http://localhost:8000/web/api/mail/send
-Mailroutes.get("/verify", VerifyOtp); // http://localhost:8000/web/api/mail/verify
+Mailroutes.post("/verify", VerifyOtp); // http://localhost:8000/web/api/mail/verify
 Mailroutes.post("/registration",Registration); // http://localhost:8000/web/api/mail/registration
 
 module.exports = Mailroutes;
